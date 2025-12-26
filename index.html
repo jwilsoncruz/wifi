@@ -3,179 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Go Pollo´s Rhosse | Pollos a la Leña</title>
-
-<meta name="description" content="Go Pollo´s Rhosse - Pollos a la Leña en Trinidad, Beni. Pedidos por WhatsApp 68972863">
+<title>WiFi Gratis | Go Pollos Rhosse</title>
 
 <style>
-body{
-    margin:0;
-    font-family: Arial Black, Arial, sans-serif;
-    background: radial-gradient(circle at top, #2b0000 0%, #000 60%);
-    color:#fff;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle, #1a1a1a, #000);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-
-header{
-    background: linear-gradient(180deg,rgba(0,0,0,.7),rgba(0,0,0,.9));
-    text-align:center;
-    padding:40px 15px;
-    box-shadow: inset 0 -10px 30px #ff6a00;
+.container {
+    background: #111;
+    border: 3px solid #d4af37;
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(212,175,55,0.6);
 }
-
-header img{
-    max-width:190px;
-    filter: drop-shadow(0 0 15px #ff9800);
+.logo img {
+    max-width: 160px;
+    margin-bottom: 15px;
 }
-
-header h1{
-    margin:20px 0 10px;
-    font-size:30px;
-    color:#ffb703;
-    text-shadow:0 0 10px #ff6a00;
+h1 {
+    color: #d4af37;
+    margin-bottom: 10px;
 }
-
-header p{
-    font-size:17px;
-    margin-bottom:20px;
+p {
+    font-size: 14px;
+    color: #ccc;
 }
-
-.btn-whatsapp{
-    display:inline-block;
-    background:#25D366;
-    color:#fff;
-    padding:16px 30px;
-    border-radius:50px;
-    font-size:20px;
-    text-decoration:none;
-    box-shadow:0 0 20px #25D366;
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 15px;
 }
-
-section{
-    padding:30px 15px;
-    max-width:900px;
-    margin:auto;
+label {
+    font-size: 13px;
 }
-
-h2{
-    text-align:center;
-    color:#ffb703;
-    margin-bottom:20px;
-    text-shadow:0 0 10px #ff6a00;
+button {
+    background: linear-gradient(45deg, #c40000, #ff0000);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 12px;
+    font-size: 16px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-weight: bold;
 }
-
-.card{
-    background:linear-gradient(180deg,#1a0000,#000);
-    border-radius:18px;
-    padding:22px;
-    margin-bottom:18px;
-    border:2px solid #b71c1c;
-    box-shadow:0 0 15px rgba(255,106,0,.4);
+button:hover {
+    opacity: 0.9;
 }
-
-.menu-item{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:10px;
-}
-
-.badge{
-    background:#d62828;
-    padding:4px 10px;
-    border-radius:20px;
-    font-size:12px;
-}
-
-footer{
-    background:#000;
-    text-align:center;
-    padding:25px;
-    border-top:3px solid #b71c1c;
-}
-
-.fixed-whatsapp{
-    position:fixed;
-    right:20px;
-    bottom:80px;
-    background:#25D366;
-    color:#fff;
-    padding:16px 20px;
-    border-radius:50%;
-    font-size:26px;
-    text-decoration:none;
-}
-
-.social-bar{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    display:flex;
-    justify-content:space-around;
-    background:linear-gradient(135deg,#b71c1c,#ff6a00);
-    padding:12px 0;
-}
-
-.social-bar a{
-    color:#fff;
-    text-decoration:none;
-    font-weight:bold;
+.footer {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #777;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <img src="logo.png" alt="Go Pollo´s Rhosse">
-    <h1>Go Pollo´s Rhosse</h1>
-    <p>🔥 Pollos a la Leña Reales 🔥<br>Crujiente por fuera, jugoso por dentro</p>
-    <a class="btn-whatsapp" href="https://wa.me/59168972863" target="_blank">
-        📲 Pedir por WhatsApp
-    </a>
-</header>
+<div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="Go Pollos Rhosse">
+    </div>
 
-<section>
-<h2>🍗 Nuestro Menú</h2>
-<div class="card">
-    <div class="menu-item"><span>Pollo Entero a la Leña</span><span class="badge">TOP</span></div>
-    <div class="menu-item"><span>Medio Pollo</span></div>
-    <div class="menu-item"><span>Cuarto de Pollo</span></div>
+    <h1>📶 WiFi Gratis</h1>
+    <p>Regístrate y recibe promociones exclusivas 🍗🔥</p>
+
+    <form id="wifiForm">
+        <input type="text" name="entry.1166974658" placeholder="Tu nombre" required>
+        <input type="tel" name="entry.905110213" placeholder="WhatsApp" required>
+
+        <label>
+            <input type="checkbox" required>
+            Acepto recibir promociones
+        </label>
+
+        <button type="submit">🔓 ACCEDER AL WIFI</button>
+    </form>
+
+    <div class="footer">
+        © Go Pollos Rhosse
+    </div>
 </div>
 
-<div class="card">
-    <strong>🔥 Combos</strong><br><br>
-    Combo Familiar – Pollo + Papas + Arroz<br>
-    Combo Personal – ¼ Pollo + Papas
-</div>
+<script>
+document.getElementById("wifiForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-<div class="card">
-    🥤 Bebidas: Gaseosas
-</div>
-</section>
+    var form = e.target;
+    var data = new FormData(form);
 
-<section>
-<h2>🚚 Atención</h2>
-<div class="card">
-✔️ Para llevar<br>
-✔️ Delivery en Trinidad<br>
-✔️ Consumo en el lugar<br>
-⏰ Todos los días
-</div>
-</section>
-
-<footer>
-© 2025 Go Pollo´s Rhosse<br>
-Pedidos WhatsApp: <strong>68972863</strong>
-</footer>
-
-<a class="fixed-whatsapp" href="https://wa.me/59168972863" target="_blank">💬</a>
-
-<div class="social-bar">
-    <a href="https://wa.me/59168972863" target="_blank">💬 WhatsApp</a>
-    <a href="https://www.facebook.com/GoPollosRhosseTdd" target="_blank">📘 Facebook</a>
-    <a href="https://www.tiktok.com/@go.rhosse.pollos.tdd" target="_blank">🎵 TikTok</a>
-</div>
+    fetch("https://docs.google.com/forms/d/1pV2-1ZKzZMdHRFjfrRYVGW5Y6TJx34yI1hyXM0NdWag/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: data
+    }).then(() => {
+        window.location.href = "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
+    });
+});
+</script>
 
 </body>
 </html>
+
 
