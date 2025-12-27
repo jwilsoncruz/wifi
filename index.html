@@ -38,7 +38,8 @@ p {
     font-size: 14px;
     color: #ccc;
 }
-input {
+input[type="text"],
+input[type="tel"] {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -46,8 +47,16 @@ input {
     border: none;
     font-size: 15px;
 }
-label {
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     font-size: 13px;
+    margin-top: 6px;
+}
+.checkbox-row input {
+    width: auto;
 }
 button {
     background: linear-gradient(45deg, #c40000, #ff0000);
@@ -83,18 +92,22 @@ button:hover {
     <p>Regístrate y recibe promociones exclusivas 🍗🔥</p>
 
     <form id="wifiForm">
-        <input type="text" name="entry.1166974658" placeholder="Tu nombre" required>
-        <input type="tel" name="entry.905110213" placeholder="WhatsApp" required>
+        <input type="text" name="entry.2005620554" placeholder="Tu nombre" required>
 
-        <label>
-            <input type="checkbox" required>Acepto recibir promociones
-        </label>
+        <input type="tel" name="entry.1166974658" placeholder="WhatsApp" required>
+
+        <input type="text" name="entry.1736957944" placeholder="Fecha de cumpleaños (ej: 12 dic)" required>
+
+        <div class="checkbox-row">
+            <input type="checkbox" name="entry.905110213" value="Si, acepto" required>
+            <span>Acepto recibir promociones</span>
+        </div>
 
         <button type="submit">🔓 ACCEDER AL WIFI</button>
     </form>
 
     <div class="footer">
-        2026 © Go Pollos Rhosse
+        © Go Pollos Rhosse
     </div>
 </div>
 
@@ -105,18 +118,14 @@ document.getElementById("wifiForm").addEventListener("submit", function(e) {
     var form = e.target;
     var data = new FormData(form);
 
-    fetch("https://docs.google.com/forms/d/1pV2-1ZKzZMdHRFjfrRYVGW5Y6TJx34yI1hyXM0NdWag/formResponse", {
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse", {
         method: "POST",
         mode: "no-cors",
         body: data
     }).then(() => {
-        window.location.href = "https://wa.me/59168972863?text=Hola Go Pollos Rhosse, ya me registré para el WiFi";
-    });
-});
-</script>
+        window.location.href = "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
+    })
 
-</body>
-</html>
 
 
 </body>
