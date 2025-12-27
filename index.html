@@ -30,8 +30,13 @@ body {
     max-width: 160px;
     margin-bottom: 15px;
 }
-h1 { color: #d4af37; }
-p { font-size: 14px; color: #ccc; }
+h1 {
+    color: #d4af37;
+}
+p {
+    font-size: 14px;
+    color: #ccc;
+}
 input[type="text"], input[type="tel"] {
     width: 100%;
     padding: 12px;
@@ -43,10 +48,9 @@ input[type="text"], input[type="tel"] {
 .checkbox-row {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 6px;
     font-size: 13px;
-    margin: 6px 0;
+    margin: 8px 0;
 }
 button {
     background: linear-gradient(45deg, #c40000, #ff0000);
@@ -69,6 +73,7 @@ button {
 </head>
 
 <body>
+
 <div class="container">
     <div class="logo">
         <img src="logo.png" alt="Go Pollos Rhosse">
@@ -81,24 +86,24 @@ button {
         <input type="text" name="entry.2005620554" placeholder="Tu nombre" required>
         <input type="tel" name="entry.1166974658" placeholder="WhatsApp" required>
 
-        <!-- Checkbox fijo -->
-        <input type="hidden" name="entry.905110213" value="Si, acepto">
         <div class="checkbox-row">
-            <input type="checkbox" checked disabled>
-            <span>Acepto recibir promociones</span>
+            <input type="checkbox" name="entry.905110213" value="Si, acepto" required>
+            <label>Acepto recibir promociones</label>
         </div>
 
         <button type="submit">🔓 ACCEDER AL WIFI</button>
     </form>
 
-    <div class="footer">© Go Pollos Rhosse</div>
+    <div class="footer">
+        © Go Pollos Rhosse
+    </div>
 </div>
 
 <script>
 document.getElementById("wifiForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    var form = e.target;
-    var data = new FormData(form);
+
+    var data = new FormData(this);
 
     fetch("https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse", {
         method: "POST",
@@ -109,8 +114,10 @@ document.getElementById("wifiForm").addEventListener("submit", function(e) {
     });
 });
 </script>
+
 </body>
 </html>
+
 
 
 
