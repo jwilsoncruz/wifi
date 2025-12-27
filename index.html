@@ -37,7 +37,8 @@ p {
     font-size: 14px;
     color: #ccc;
 }
-input {
+input[type="text"],
+input[type="tel"] {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -83,19 +84,20 @@ button {
     <h1>📶 WiFi Gratis</h1>
     <p>Regístrate y recibe promociones exclusivas 🍗🔥</p>
 
-    <form id="wifiForm">
+    <!-- FORMULARIO GOOGLE FORMS -->
+    <form 
+      action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" 
+      method="POST" 
+      target="_blank" 
+      onsubmit="setTimeout(redirWA, 500)"
+    >
+        <!-- CAMPOS -->
         <input type="text" name="entry.2005620554" placeholder="Tu nombre" required>
-
         <input type="tel" name="entry.1166974658" placeholder="WhatsApp" required>
+        <input type="text" name="entry.1736957944" placeholder="Cumpleaños (ej: 12 dic)">
 
-        <!-- CUMPLEAÑOS SEGURO -->
-        <input type="text" 
-               name="entry.1736957944" 
-               placeholder="Cumpleaños (ej: 12 dic)"
-        >
-
+        <!-- Checkbox valor fijo -->
         <input type="hidden" name="entry.905110213" value="Si, acepto">
-
         <div class="checkbox-row">
             <input type="checkbox" checked disabled>
             <span>Acepto recibir promociones</span>
@@ -108,31 +110,14 @@ button {
 </div>
 
 <script>
-document.getElementById("wifiForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    var form = e.target;
-    var data = new FormData(form);
-
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse", {
-        method: "POST",
-        mode: "no-cors",
-        body: data
-    }).then(() => {
-        window.location.href =
-        "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
-    });
-});
+function redirWA() {
+    window.location.href =
+    "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
+}
 </script>
 
 </body>
 </html>
 
-
-
-
-
-</body>
-</html>
 
 
