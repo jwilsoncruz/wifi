@@ -37,8 +37,7 @@ p {
     font-size: 14px;
     color: #ccc;
 }
-input[type="text"],
-input[type="tel"] {
+input {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -52,7 +51,7 @@ input[type="tel"] {
     justify-content: center;
     gap: 6px;
     font-size: 13px;
-    margin-top: 6px;
+    margin: 6px 0;
 }
 button {
     background: linear-gradient(45deg, #c40000, #ff0000);
@@ -85,18 +84,16 @@ button {
     <p>Regístrate y recibe promociones exclusivas 🍗🔥</p>
 
     <form id="wifiForm">
-
-        <!-- Campos técnicos requeridos -->
-        <input type="hidden" name="fvv" value="1">
-        <input type="hidden" name="draftResponse" value="[null,null,&quot;-1&quot;]">
-        <input type="hidden" name="pageHistory" value="0">
-
-        <!-- Campos reales -->
         <input type="text" name="entry.2005620554" placeholder="Tu nombre" required>
-        <input type="tel" name="entry.1166974658" placeholder="WhatsApp" required>
-        <input type="text" name="entry.1736957944" placeholder="Fecha de cumpleaños (ej: 12 dic)" required>
 
-        <!-- Valor fijo de aceptación -->
+        <input type="tel" name="entry.1166974658" placeholder="WhatsApp" required>
+
+        <!-- CUMPLEAÑOS SEGURO -->
+        <input type="text" 
+               name="entry.1736957944" 
+               placeholder="Cumpleaños (ej: 12 dic)"
+        >
+
         <input type="hidden" name="entry.905110213" value="Si, acepto">
 
         <div class="checkbox-row">
@@ -114,23 +111,23 @@ button {
 document.getElementById("wifiForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    var data = new FormData(this);
+    var form = e.target;
+    var data = new FormData(form);
 
     fetch("https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse", {
         method: "POST",
         mode: "no-cors",
         body: data
+    }).then(() => {
+        window.location.href =
+        "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
     });
-
-    // Redirección SIEMPRE funciona
-    setTimeout(function() {
-        window.location.href = "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
-    }, 800);
 });
 </script>
 
 </body>
 </html>
+
 
 
 
