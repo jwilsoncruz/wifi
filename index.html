@@ -3,67 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal WiFi Premium</title>
+    <title>WiFi GoPollosRhosse</title>
     <style>
-        body { background-color: #000000; color: #ffffff; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .portal-card { background: #111111; border: 2px solid #D4AF37; padding: 30px; border-radius: 15px; width: 320px; text-align: center; box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.2); }
-        .logo { max-width: 150px; margin-bottom: 20px; }
-        h2 { color: #D4AF37; font-size: 1.2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #222222; border: 1px solid #444444; border-radius: 5px; color: white; box-sizing: border-box; }
-        input:focus { border-color: #D4AF37; outline: none; }
-        label { display: block; text-align: left; font-size: 0.75rem; color: #aaaaaa; margin-top: 5px; }
-        .promo-box { display: flex; align-items: center; font-size: 0.7rem; margin: 15px 0; color: #D4AF37; }
-        .promo-box input { width: auto; margin-right: 10px; }
-        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .portal-card { background: #111; border: 2px solid #D4AF37; padding: 30px; border-radius: 20px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+        .logo { max-width: 140px; margin-bottom: 15px; }
+        h2 { color: #D4AF37; font-size: 1.4rem; margin-bottom: 20px; text-transform: uppercase; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; box-sizing: border-box; font-size: 16px; }
+        input:focus { border-color: #D4AF37; outline: none; box-shadow: 0 0 5px #D4AF37; }
+        label { display: block; text-align: left; font-size: 0.8rem; color: #aaa; margin-top: 5px; padding-left: 2px; }
+        .promo-box { display: flex; align-items: center; font-size: 0.8rem; margin: 15px 0; color: #D4AF37; background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 8px; }
+        .promo-box input { width: auto; margin: 0 10px 0 0; }
+        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1rem; }
+        button:active { transform: scale(0.98); }
         #success-area { display: none; }
-        .wifi-details { border: 1px solid #D4AF37; padding: 15px; margin-top: 20px; border-radius: 8px; background: #1a1a1a; }
+        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; border-radius: 12px; background: #1a1a1a; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <div class="portal-card">
-    <img src="logo.png" alt="Logo" class="logo">
+    <img src="logo.png" alt="GoPollosRhosse" class="logo" onerror="this.style.display='none'">
 
     <div id="form-area">
-        <h2>Acceso WiFi VIP</h2>
-        
-        <script type="text/javascript">var submitted=false;</script>
-        <iframe name="hidden_confirm" id="hidden_confirm" style="display:none;" onload="if(submitted){showWifi();}"></iframe>
-
-        <form action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" 
-              method="POST" target="hidden_confirm" onsubmit="submitted=true;">
-
-            <input type="text" name="entry.2005620554" placeholder="Nombre y Apellido" required>
-            <input type="tel" name="entry.1166974658" placeholder="WhatsApp (Ej: 591...)" required>
+        <h2>Acceso VIP</h2>
+        <form id="wifi-form">
+            <input type="text" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="tel" id="whatsapp" placeholder="WhatsApp (Ej: 591...)" required>
             
-            <label>Fecha de Nacimiento:</label>
-            <input type="date" name="entry.1180295174" required>
+            <label>Tu Cumpleaños:</label>
+            <input type="date" id="fecha" required>
 
             <div class="promo-box">
-                <input type="checkbox" name="entry.905110213" value="Sí" checked id="p">
-                <label for="p">Deseo recibir regalos en mi cumpleaños</label>
+                <input type="checkbox" id="regalo" checked>
+                <label for="regalo">¡Quiero mi regalo de cumpleaños! 🎁</label>
             </div>
 
-            <button type="submit">Activar Internet</button>
+            <button type="submit" id="btn-enviar">Activar Internet Ahora</button>
         </form>
     </div>
 
     <div id="success-area">
-        <h2 style="color: #D4AF37;">¡Bienvenido!</h2>
-        <p style="font-size: 0.9rem;">Registro completado con éxito.</p>
+        <h2 style="color: #D4AF37;">¡CONECTADO!</h2>
+        <p>Gracias por registrarte.</p>
         <div class="wifi-details">
-            <span style="color: #aaaaaa;">RED:</span> <b>WiFi GoPollosRhosse</b><br>
-            <span style="color: #aaaaaa;">CLAVE:</span> <b style="color: #D4AF37;">Rhosse2026</b>
+            <span style="color: #aaa; font-size: 0.8rem;">RED:</span><br>
+            <b style="font-size: 1.1rem;">WiFi GoPollosRhosse</b><br><br>
+            <span style="color: #aaa; font-size: 0.8rem;">CONTRASEÑA:</span><br>
+            <b style="color: #D4AF37; font-size: 1.4rem;">Rhosse2026</b>
         </div>
-        <p style="font-size: 0.7rem; margin-top: 15px; color: #666;">Ya puedes disfrutar de la conexión.</p>
+        <p style="font-size: 0.8rem; margin-top: 20px; color: #888;">Ya puedes navegar libremente.</p>
     </div>
 </div>
 
 <script>
-    function showWifi() {
-        document.getElementById('form-area').style.display = 'none';
-        document.getElementById('success-area').style.display = 'block';
-    }
+document.getElementById('wifi-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // DETIENE EL DOBLE FORMULARIO
+    
+    const btn = document.getElementById('btn-enviar');
+    btn.innerText = "CONECTANDO...";
+    btn.disabled = true;
+
+    const url = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse";
+    
+    // IDs de tu formulario Google
+    const formData = new URLSearchParams();
+    formData.append('entry.2005620554', document.getElementById('nombre').value);
+    formData.append('entry.1166974658', document.getElementById('whatsapp').value);
+    formData.append('entry.1180295174', document.getElementById('fecha').value);
+    formData.append('entry.905110213', document.getElementById('regalo').checked ? 'Sí' : 'No');
+
+    // Envío silencioso
+    fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+    }).then(() => {
+        showWifi();
+    }).catch(() => {
+        // Mostramos clave incluso si falla el internet momentáneamente
+        showWifi(); 
+    });
+});
+
+function showWifi() {
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-area').style.display = 'block';
+}
 </script>
 
 </body>
