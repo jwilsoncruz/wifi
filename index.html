@@ -5,86 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal WiFi Premium</title>
     <style>
-        body {
-            background-color: #000000; /* Fondo Negro */
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .portal-card {
-            background: #111111;
-            border: 2px solid #D4AF37; /* Borde Dorado */
-            padding: 30px;
-            border-radius: 15px;
-            width: 320px;
-            text-align: center;
-            box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.2);
-        }
-        .logo {
-            max-width: 150px;
-            margin-bottom: 20px;
-        }
-        h2 {
-            color: #D4AF37; /* Dorado */
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: #222222;
-            border: 1px solid #444444;
-            border-radius: 5px;
-            color: white;
-            box-sizing: border-box;
-        }
-        input:focus {
-            border-color: #D4AF37;
-            outline: none;
-        }
-        label {
-            display: block;
-            text-align: left;
-            font-size: 0.75rem;
-            color: #aaaaaa;
-            margin-top: 5px;
-        }
-        .promo-box {
-            display: flex;
-            align-items: center;
-            font-size: 0.7rem;
-            margin: 15px 0;
-            color: #D4AF37;
-        }
+        body { background-color: #000000; color: #ffffff; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .portal-card { background: #111111; border: 2px solid #D4AF37; padding: 30px; border-radius: 15px; width: 320px; text-align: center; box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.2); }
+        .logo { max-width: 150px; margin-bottom: 20px; }
+        h2 { color: #D4AF37; font-size: 1.2rem; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #222222; border: 1px solid #444444; border-radius: 5px; color: white; box-sizing: border-box; }
+        input:focus { border-color: #D4AF37; outline: none; }
+        label { display: block; text-align: left; font-size: 0.75rem; color: #aaaaaa; margin-top: 5px; }
+        .promo-box { display: flex; align-items: center; font-size: 0.7rem; margin: 15px 0; color: #D4AF37; }
         .promo-box input { width: auto; margin-right: 10px; }
-        
-        button {
-            background: linear-gradient(45deg, #D4AF37, #F4CF67); /* Degradado Dorado */
-            color: #000;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
+        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
         #success-area { display: none; }
-        .wifi-details {
-            border: 1px solid #D4AF37;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-            background: #1a1a1a;
-        }
+        .wifi-details { border: 1px solid #D4AF37; padding: 15px; margin-top: 20px; border-radius: 8px; background: #1a1a1a; }
     </style>
 </head>
 <body>
@@ -98,14 +30,22 @@
         <script type="text/javascript">var submitted=false;</script>
         <iframe name="hidden_confirm" id="hidden_confirm" style="display:none;" onload="if(submitted){showWifi();}"></iframe>
 
-       <form action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" method="POST">
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" 
+              method="POST" target="hidden_confirm" onsubmit="submitted=true;">
 
-    <input type="text" name="entry.2005620554" placeholder="Nombre" required>
-    <input type="tel" name="entry.1166974658" placeholder="WhatsApp" required>
-    <input type="date" name="entry.1180295174" required>
+            <input type="text" name="entry.2005620554" placeholder="Nombre y Apellido" required>
+            <input type="tel" name="entry.1166974658" placeholder="WhatsApp (Ej: 591...)" required>
+            
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" name="entry.1180295174" required>
 
-    <button type="submit">PROBAR CONEXIÓN</button>
-</form>
+            <div class="promo-box">
+                <input type="checkbox" name="entry.905110213" value="Sí" checked id="p">
+                <label for="p">Deseo recibir regalos en mi cumpleaños</label>
+            </div>
+
+            <button type="submit">Activar Internet</button>
+        </form>
     </div>
 
     <div id="success-area">
