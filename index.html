@@ -1,123 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WiFi Gratis | Go Pollos Rhosse</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle, #1a1a1a, #000);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-.container {
-    background: #111;
-    border: 3px solid #d4af37;
-    border-radius: 20px;
-    padding: 25px;
-    max-width: 360px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(212,175,55,0.6);
-}
-.logo img {
-    max-width: 160px;
-    margin-bottom: 15px;
-}
-h1 {
-    color: #d4af37;
-    margin-bottom: 10px;
-}
-p {
-    font-size: 14px;
-    color: #ccc;
-}
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 10px;
-    border: none;
-    font-size: 15px;
-}
-label {
-    font-size: 13px;
-}
-button {
-    background: linear-gradient(45deg, #c40000, #ff0000);
-    color: #fff;
-    border: none;
-    padding: 14px;
-    width: 100%;
-    border-radius: 12px;
-    font-size: 16px;
-    margin-top: 12px;
-    cursor: pointer;
-    font-weight: bold;
-}
-button:hover {
-    opacity: 0.9;
-}
-.footer {
-    margin-top: 10px;
-    font-size: 11px;
-    color: #777;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Gratis - Registro</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f3f4f6;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 { color: #1f2937; margin-bottom: 0.5rem; font-size: 1.5rem; }
+        p { color: #6b7280; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        label {
+            display: block;
+            text-align: left;
+            font-size: 0.8rem;
+            color: #374151;
+            margin-top: 10px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            margin: 15px 0;
+            text-align: left;
+        }
+        .checkbox-container input { width: auto; margin-right: 10px; }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #1d4ed8; }
+        #success-message { display: none; padding: 20px; }
+        .wifi-info {
+            background: #ecfdf5;
+            border: 1px dashed #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
 </head>
-
 <body>
 
 <div class="container">
-    <div class="logo">
-        <img src="logo.png" alt="Go Pollos Rhosse">
+    <div id="form-container">
+        <h1>Conectar al WiFi</h1>
+        <p>Regístrate para obtener acceso gratuito</p>
+        
+        <script type="text/javascript">var submitted=false;</script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" 
+                onload="if(submitted) { showSuccess(); }"></iframe>
+
+        <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" 
+              method="POST" 
+              target="hidden_iframe" 
+              onsubmit="submitted=true;">
+
+            <input type="text" name="entry.24479905" placeholder="Nombre y Apellido" required>
+            
+            <input type="tel" name="entry.1691216654" placeholder="WhatsApp (Ej: 591...)" required>
+            
+            <label for="fecha">Fecha de Nacimiento:</label>
+            <input type="date" name="entry.1742461972" id="fecha" required>
+
+            <div class="checkbox-container">
+                <input type="checkbox" name="entry.1643445831" value="Sí" checked id="promo">
+                <label for="promo">Acepto recibir promociones y regalos en mi cumpleaños</label>
+            </div>
+
+            <button type="submit">OBTENER ACCESO</button>
+        </form>
     </div>
 
-    <h1>📶 WiFi Gratis</h1>
-    <p>Regístrate y recibe promociones exclusivas 🍗🔥</p>
-
-    <form id="wifiForm">
-        <input type="text" name="entry.1166974658" placeholder="Nombre" required>
-        <input type="tel" name="entry.905110213" placeholder="WhatsApp" required>
-
-        <label>
-            <input type="checkbox" required>
-            Acepto recibir promociones
-        </label>
-
-        <button type="submit">🔓 ACCEDER AL WIFI</button>
-    </form>
-
-    <div class="footer">
-        © Go Pollos Rhosse
+    <div id="success-message">
+        <h2 style="color: #10b981;">¡Listo! 🎉</h2>
+        <p>Tus datos han sido registrados correctamente.</p>
+        <div class="wifi-info">
+            <strong>Red:</strong>GoPollosRhosseWiFi<br>
+            <strong>Clave:</strong> Rhosse2026
+        </div>
+        <p style="margin-top: 15px; font-size: 0.8rem;">Ya puedes cerrar esta ventana y navegar.</p>
     </div>
 </div>
 
 <script>
-document.getElementById("wifiForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    var form = e.target;
-    var data = new FormData(form);
-
-    fetch("https://docs.google.com/forms/d/1pV2-1ZKzZMdHRFjfrRYVGW5Y6TJx34yI1hyXM0NdWag/formResponse", {
-        method: "POST",
-        mode: "no-cors",
-        body: data
-    }).then(() => {
-        window.location.href = "https://wa.me/59168972863?text=Hola%20Go%20Pollos%20Rhosse%2C%20ya%20me%20registré%20para%20el%20WiFi%20🍗📶";
-    });
-});
+    function showSuccess() {
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+    }
 </script>
 
 </body>
 </html>
+
 
 
 
