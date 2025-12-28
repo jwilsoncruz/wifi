@@ -3,129 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiFi Gratis - Registro</title>
+    <title>Portal WiFi Premium</title>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --bg-color: #f3f4f6;
-        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            background-color: #000000; /* Fondo Negro */
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
         }
-        .container {
-            background: white;
-            padding: 2rem;
+        .portal-card {
+            background: #111111;
+            border: 2px solid #D4AF37; /* Borde Dorado */
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
+            width: 320px;
             text-align: center;
+            box-shadow: 0px 0px 20px rgba(212, 175, 55, 0.2);
         }
-        h1 { color: #1f2937; margin-bottom: 0.5rem; font-size: 1.5rem; }
-        p { color: #6b7280; margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #D4AF37; /* Dorado */
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
         input {
             width: 100%;
             padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
+            margin: 10px 0;
+            background: #222222;
+            border: 1px solid #444444;
+            border-radius: 5px;
+            color: white;
             box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #D4AF37;
+            outline: none;
         }
         label {
             display: block;
             text-align: left;
-            font-size: 0.8rem;
-            color: #374151;
-            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #aaaaaa;
+            margin-top: 5px;
         }
-        .checkbox-container {
+        .promo-box {
             display: flex;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             margin: 15px 0;
-            text-align: left;
+            color: #D4AF37;
         }
-        .checkbox-container input { width: auto; margin-right: 10px; }
+        .promo-box input { width: auto; margin-right: 10px; }
+        
         button {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 14px;
+            background: linear-gradient(45deg, #D4AF37, #F4CF67); /* Degradado Dorado */
+            color: #000;
             border: none;
-            border-radius: 8px;
+            padding: 15px;
             width: 100%;
+            border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            text-transform: uppercase;
+            margin-top: 10px;
         }
-        button:hover { background-color: #1d4ed8; }
-        #success-message { display: none; padding: 20px; }
-        .wifi-info {
-            background: #ecfdf5;
-            border: 1px dashed #10b981;
+        #success-area { display: none; }
+        .wifi-details {
+            border: 1px solid #D4AF37;
             padding: 15px;
+            margin-top: 20px;
             border-radius: 8px;
-            margin-top: 15px;
+            background: #1a1a1a;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div id="form-container">
-        <h1>Conectar al WiFi</h1>
-        <p>Regístrate para obtener acceso gratuito</p>
+<div class="portal-card">
+    <img src="logo.png" alt="Logo" class="logo">
+
+    <div id="form-area">
+        <h2>Acceso WiFi VIP</h2>
         
         <script type="text/javascript">var submitted=false;</script>
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" 
-                onload="if(submitted) { showSuccess(); }"></iframe>
+        <iframe name="hidden_confirm" id="hidden_confirm" style="display:none;" onload="if(submitted){showWifi();}"></iframe>
 
         <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" 
-              method="POST" 
-              target="hidden_iframe" 
-              onsubmit="submitted=true;">
+              method="POST" target="hidden_confirm" onsubmit="submitted=true;">
 
             <input type="text" name="entry.24479905" placeholder="Nombre y Apellido" required>
-            
             <input type="tel" name="entry.1691216654" placeholder="WhatsApp (Ej: 591...)" required>
             
-            <label for="fecha">Fecha de Nacimiento:</label>
-            <input type="date" name="entry.1742461972" id="fecha" required>
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" name="entry.1742461972" required>
 
-            <div class="checkbox-container">
-                <input type="checkbox" name="entry.1643445831" value="Sí" checked id="promo">
-                <label for="promo">Acepto recibir promociones y regalos en mi cumpleaños</label>
+            <div class="promo-box">
+                <input type="checkbox" name="entry.1643445831" value="Sí" checked id="p">
+                <label for="p">Deseo recibir regalos en mi cumpleaños</label>
             </div>
 
-            <button type="submit">OBTENER ACCESO</button>
+            <button type="submit">Activar Internet</button>
         </form>
     </div>
 
-    <div id="success-message">
-        <h2 style="color: #10b981;">¡Listo! 🎉</h2>
-        <p>Tus datos han sido registrados correctamente.</p>
-        <div class="wifi-info">
-            <strong>Red:</strong>GoPollosRhosseWiFi<br>
-            <strong>Clave:</strong> Rhosse2026
+    <div id="success-area">
+        <h2 style="color: #D4AF37;">¡Bienvenido!</h2>
+        <p style="font-size: 0.9rem;">Registro completado con éxito.</p>
+        <div class="wifi-details">
+            <span style="color: #aaaaaa;">RED:</span> <b>TU_RED</b><br>
+            <span style="color: #aaaaaa;">CLAVE:</span> <b style="color: #D4AF37;">TU_CLAVE</b>
         </div>
-        <p style="margin-top: 15px; font-size: 0.8rem;">Ya puedes cerrar esta ventana y navegar.</p>
+        <p style="font-size: 0.7rem; margin-top: 15px; color: #666;">Ya puedes disfrutar de la conexión.</p>
     </div>
 </div>
 
 <script>
-    function showSuccess() {
-        document.getElementById('form-container').style.display = 'none';
-        document.getElementById('success-message').style.display = 'block';
+    function showWifi() {
+        document.getElementById('form-area').style.display = 'none';
+        document.getElementById('success-area').style.display = 'block';
     }
 </script>
 
 </body>
 </html>
+
 
 
 
