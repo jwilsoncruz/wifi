@@ -59,48 +59,40 @@
 </div>
 
 <script>
+var submitted = false;
+
 document.getElementById('wifi-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const btn = document.getElementById('btn-enviar');
-    btn.innerText = "CONECTANDO...";
-    btn.disabled = true;
+    // 1. Preparamos el formulario para el envío invisible
+    const form = e.target;
+    form.action = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse";
+    form.method = "POST";
+    form.target = "hidden_iframe"; // Apunta al túnel invisible
 
-    // URL de envío de tu formulario
-    const url = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse";
-    
-    // Captura de valores
-    const nombre = document.getElementById('nombre').value;
-    const whatsapp = document.getElementById('whatsapp').value;
-    const fechaFull = document.getElementById('fecha').value; // Formato YYYY-MM-DD
-    const regalo = document.getElementById('regalo').checked ? 'Sí' : 'No';
+    // 2. Creamos los campos ocultos para la fecha desglosada
+    const fechaFull = document.getElementById('fecha').value;
+    const partes = fechaFull.split('-'); // [0]=año, [1]=mes, [2]=día
 
-    // Dividir la fecha para Google Forms
-    const partesFecha = fechaFull.split('-'); // [0]=Año, [1]=Mes, [2]=Día
+    // Función para añadir campos ocultos rápido
+    const addHidden = (name, value) => {
+        let input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+    };
 
-    const formData = new URLSearchParams();
-    
-    // IDs de texto y checkbox
-    formData.append('entry.2005620554', nombre);
-    formData.append('entry.1166974658', whatsapp);
-    formData.append('entry.905110213', regalo);
+    // Mapeo manual de campos para asegurar que Google los reciba
+    addHidden('entry.2005620554', document.getElementById('nombre').value);
+    addHidden('entry.1166974658', document.getElementById('whatsapp').value);
+    addHidden('entry.905110213', document.getElementById('regalo').checked ? 'Sí' : 'No');
+    addHidden('entry.1180295174_year', partes[0]);
+    addHidden('entry.1180295174_month', partes[1]);
+    addHidden('entry.1180295174_day', partes[2]);
 
-    // IDs de FECHA (desglosados)
-    formData.append('entry.1180295174_year', partesFecha[0]);
-    formData.append('entry.1180295174_month', partesFecha[1]);
-    formData.append('entry.1180295174_day', partesFecha[2]);
-
-    // Envío silencioso
-    fetch(url, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formData.toString()
-    }).then(() => {
-        showWifi();
-    }).catch(() => {
-        showWifi(); // Mostramos clave incluso si hay error de red
-    });
+    // 3. Cambiamos el botón y disparamos
+    document.getElementById('btn-enviar').innerText = "CONECTANDO...";
+    submitted = true; 
+    // El formulario se envía solo al terminar el script
 });
 
 function showWifi() {
@@ -109,6 +101,7 @@ function showWifi() {
 }
 </script>
 </body>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showWifi();}"></iframe>
 </html>
 
 
