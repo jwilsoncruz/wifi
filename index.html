@@ -64,7 +64,7 @@ var submitted = false;
 document.getElementById('wifi-form').addEventListener('submit', function(e) {
     // 1. Preparamos el formulario para el envío invisible
     const form = e.target;
-    form.action = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/viewform?usp=sharing&ouid=107509069572199498008";
+    form.action = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/viewform?usp=header";
     form.method = "POST";
     form.target = "hidden_iframe"; // Apunta al túnel invisible
 
