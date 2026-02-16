@@ -60,20 +60,35 @@
 
 <script>
 document.getElementById('wifi-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // DETIENE EL DOBLE FORMULARIO
+    e.preventDefault();
     
     const btn = document.getElementById('btn-enviar');
     btn.innerText = "CONECTANDO...";
     btn.disabled = true;
 
+    // URL de envío de tu formulario
     const url = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse";
     
-    // IDs de tu formulario Google
+    // Captura de valores
+    const nombre = document.getElementById('nombre').value;
+    const whatsapp = document.getElementById('whatsapp').value;
+    const fechaFull = document.getElementById('fecha').value; // Formato YYYY-MM-DD
+    const regalo = document.getElementById('regalo').checked ? 'Sí' : 'No';
+
+    // Dividir la fecha para Google Forms
+    const partesFecha = fechaFull.split('-'); // [0]=Año, [1]=Mes, [2]=Día
+
     const formData = new URLSearchParams();
-    formData.append('entry.2005620554', document.getElementById('nombre').value);
-    formData.append('entry.1166974658', document.getElementById('whatsapp').value);
-    formData.append('entry.1180295174', document.getElementById('fecha').value);
-    formData.append('entry.905110213', document.getElementById('regalo').checked ? 'Sí' : 'No');
+    
+    // IDs de texto y checkbox
+    formData.append('entry.2005620554', nombre);
+    formData.append('entry.1166974658', whatsapp);
+    formData.append('entry.905110213', regalo);
+
+    // IDs de FECHA (desglosados)
+    formData.append('entry.1180295174_year', partesFecha[0]);
+    formData.append('entry.1180295174_month', partesFecha[1]);
+    formData.append('entry.1180295174_day', partesFecha[2]);
 
     // Envío silencioso
     fetch(url, {
@@ -84,8 +99,7 @@ document.getElementById('wifi-form').addEventListener('submit', function(e) {
     }).then(() => {
         showWifi();
     }).catch(() => {
-        // Mostramos clave incluso si falla el internet momentáneamente
-        showWifi(); 
+        showWifi(); // Mostramos clave incluso si hay error de red
     });
 });
 
@@ -94,7 +108,6 @@ function showWifi() {
     document.getElementById('success-area').style.display = 'block';
 }
 </script>
-
 </body>
 </html>
 
