@@ -15,11 +15,8 @@
         .promo-box { display: flex; align-items: center; font-size: 0.8rem; margin: 15px 0; color: #D4AF37; background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 8px; }
         .promo-box input { width: auto; margin: 0 10px 0 0; }
         button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1rem; }
-        button:active { transform: scale(0.98); }
-        button:disabled { background: #444; color: #888; cursor: not-allowed; }
         #success-area { display: none; }
-        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; border-radius: 12px; background: #1a1a1a; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; border-radius: 12px; background: #1a1a1a; }
     </style>
 </head>
 <body>
@@ -31,15 +28,15 @@
         <h2>Acceso VIP</h2>
         <form id="wifi-form" action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" method="POST" target="hidden_iframe">
             
-            <input type="text" id="nombre" name="entry.2005620554" placeholder="Nombre y Apellido" required>
-            <input type="tel" id="whatsapp" name="entry.1166974658" placeholder="WhatsApp (Ej: 591...)" required>
+            <input type="text" name="entry.2005620554" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="tel" name="entry.1166974658" id="whatsapp" placeholder="WhatsApp (Ej: 591...)" required>
             
             <label>Tu Cumpleaños:</label>
-            <input type="date" id="fecha" required>
+            <input type="date" id="fecha_input" required>
 
             <div class="promo-box">
-                <input type="checkbox" id="regalo" name="entry.905110213" value="Sí" checked>
-                <label for="regalo">¡Quiero mi regalo de cumpleaños! 🎁</label>
+                <input type="checkbox" name="entry.905110213" value="Sí" checked>
+                <label>¡Quiero mi regalo! 🎁</label>
             </div>
 
             <button type="submit" id="btn-enviar">Activar Internet Ahora</button>
@@ -48,52 +45,43 @@
 
     <div id="success-area">
         <h2 style="color: #D4AF37;">¡CONECTADO!</h2>
-        <p>Gracias por registrarte.</p>
         <div class="wifi-details">
-            <span style="color: #aaa; font-size: 0.8rem;">RED:</span><br>
-            <b style="font-size: 1.1rem;">WiFi GoPollosRhosse</b><br><br>
-            <span style="color: #aaa; font-size: 0.8rem;">CONTRASEÑA:</span><br>
-            <b style="color: #D4AF37; font-size: 1.4rem;">Rhosse2026</b>
+            <span style="color: #aaa;">RED:</span><br><b>WiFi GoPollosRhosse</b><br><br>
+            <span style="color: #aaa;">CONTRASEÑA:</span><br><b style="color: #D4AF37; font-size: 1.4rem;">Rhosse2026</b>
         </div>
-        <p style="font-size: 0.8rem; margin-top: 20px; color: #888;">Ya puedes navegar libremente.</p>
-        2026 @ Jedis Web Solucion
     </div>
 </div>
 
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showWifi(); }"></iframe>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { finalizar(); }"></iframe>
 
 <script>
 var submitted = false;
 
-document.getElementById('wifi-form').addEventListener('submit', function(e) {
-    const btn = document.getElementById('btn-enviar');
-    const form = e.target;
-    const fechaVal = document.getElementById('fecha').value;
+document.getElementById('wifi-form').onsubmit = function() {
+    const fecha = document.getElementById('fecha_input').value;
+    if(!fecha) return false;
 
-    if (!fechaVal) return;
-
-    // Desglose de fecha para los campos entry.1180295174_year/month/day
-    const partes = fechaVal.split('-'); 
-
-    const addHidden = (name, value) => {
-        let input = document.createElement("input");
-        input.type = "hidden";
-        input.name = name;
-        input.value = value;
-        form.appendChild(input);
+    const partes = fecha.split('-'); // [0]año, [1]mes, [2]día
+    
+    // Añadimos los campos de fecha que Google pide por separado
+    const f = document.getElementById('wifi-form');
+    
+    const crearOculto = (n, v) => {
+        let i = document.createElement("input");
+        i.type = "hidden"; i.name = n; i.value = v;
+        f.appendChild(i);
     };
 
-    // Estos son los campos que Google exige por separado
-    addHidden('entry.1180295174_year', partes[0]);
-    addHidden('entry.1180295174_month', partes[1]);
-    addHidden('entry.1180295174_day', partes[2]);
+    crearOculto('entry.1180295174_year', partes[0]);
+    crearOculto('entry.1180295174_month', partes[1]);
+    crearOculto('entry.1180295174_day', partes[2]);
 
-    btn.innerText = "CONECTANDO...";
-    btn.disabled = true;
-    submitted = true; 
-});
+    document.getElementById('btn-enviar').innerText = "CONECTANDO...";
+    submitted = true;
+    return true; // Permite que el formulario se envíe al iframe
+};
 
-function showWifi() {
+function finalizar() {
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('success-area').style.display = 'block';
 }
