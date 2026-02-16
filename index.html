@@ -5,6 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WiFi GoPollosRhosse</title>
     <style>
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .portal-card { background: #111; border: 2px solid #D4AF37; padding: 30px; border-radius: 20px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+        h2 { color: #D4AF37; text-transform: uppercase; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; }
+        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        #success-area { display: none; }
+        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; background: #1a1a1a; }
+    </style>
+</head>
+<body>
+
+<div class="portal-card">
+    <div id="form-area">
+        <h2>Acceso VIP</h2>
+        <form id="wifi-form">
+            <input type="text" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="tel" id="whatsapp" placeholder="WhatsApp (Ej: 591...)" required>
+            <label style="font-size: 0.8rem; color: #aaa;">Cumpleaños:</label>
+            <input type="date" id="fecha" required>
+            <button type="submit" id="btn-enviar">Activar Internet</button>
+        </form>
+    </div>
+
+    <div id="success-area">
+        <h2 style="color: #D4AF37;">¡CONECTADO!</h2>
+        <div class="wifi-details">
+            <b>RED:</b> WiFi GoPollosRhosse<br>
+            <b>CLAVE:</b> <span style="color: #D4AF37;">Rhosse2026</span>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('wifi-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const nombre = encodeURIComponent(document.getElementById('nombre').value);
+    const whatsapp = encodeURIComponent(document.getElementById('whatsapp').value);
+    const fechaVal = document.getElementById('fecha').value;
+    const p = fechaVal.split('-'); // [0]año, [1]mes, [2]día
+
+    // Construimos la URL exacta que funcionó en tu prueba manual
+    const urlGuerrera = `https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse?entry.2005620554=${nombre}&entry.1166974658=${whatsapp}&entry.1180295174_year=${p[0]}&entry.1180295174_month=${p[1]}&entry.1180295174_day=${p[2]}&entry.905110213=Sí&submit=Submit`;
+
+    // ABRIMOS UNA VENTANA PEQUEÑA PARA FORZAR EL ENVÍO
+    const win = window.open(urlGuerrera, 'fiel', 'width=100,height=100,left=-500,top=-500');
+    
+    // Mostramos la clave inmediatamente
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-area').style.display = 'block';
+
+    // Cerramos la ventanita después de 2 segundos
+    setTimeout(() => { if(win) win.close(); }, 2000);
+});
+</script>
+
+</body>
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi GoPollosRhosse</title>
+    <style>
         body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
         .portal-card { background: #111; border: 2px solid #D4AF37; padding: 30px; border-radius: 20px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
         .logo { max-width: 140px; margin-bottom: 15px; }
@@ -87,5 +153,5 @@ function finalizar() {
 }
 </script>
 
-</body>
+</body> --->
 </html>
