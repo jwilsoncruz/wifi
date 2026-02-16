@@ -16,6 +16,7 @@
         .promo-box input { width: auto; margin: 0 10px 0 0; }
         button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1rem; }
         button:active { transform: scale(0.98); }
+        button:disabled { background: #444; color: #888; cursor: not-allowed; }
         #success-area { display: none; }
         .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; border-radius: 12px; background: #1a1a1a; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -28,15 +29,16 @@
 
     <div id="form-area">
         <h2>Acceso VIP</h2>
-        <form id="wifi-form">
-            <input type="text" id="nombre" placeholder="Nombre y Apellido" required>
-            <input type="tel" id="whatsapp" placeholder="WhatsApp (Ej: 591...)" required>
+        <form id="wifi-form" action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" method="POST" target="hidden_iframe">
+            
+            <input type="text" id="nombre" name="entry.2005620554" placeholder="Nombre y Apellido" required>
+            <input type="tel" id="whatsapp" name="entry.1166974658" placeholder="WhatsApp (Ej: 591...)" required>
             
             <label>Tu Cumpleaños:</label>
             <input type="date" id="fecha" required>
 
             <div class="promo-box">
-                <input type="checkbox" id="regalo" checked>
+                <input type="checkbox" id="regalo" name="entry.905110213" value="Sí" checked>
                 <label for="regalo">¡Quiero mi regalo de cumpleaños! 🎁</label>
             </div>
 
@@ -54,25 +56,26 @@
             <b style="color: #D4AF37; font-size: 1.4rem;">Rhosse2026</b>
         </div>
         <p style="font-size: 0.8rem; margin-top: 20px; color: #888;">Ya puedes navegar libremente.</p>
-        2026 %40 Jedis Web Solucion
+        2026 @ Jedis Web Solucion
     </div>
 </div>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showWifi(); }"></iframe>
 
 <script>
 var submitted = false;
 
 document.getElementById('wifi-form').addEventListener('submit', function(e) {
-    // 1. Preparamos el formulario para el envío invisible
+    const btn = document.getElementById('btn-enviar');
     const form = e.target;
-    form.action = "https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse";
-    form.method = "POST";
-    form.target = "hidden_iframe"; // Apunta al túnel invisible
-
-    // 2. Creamos los campos ocultos para la fecha desglosada
     const fechaFull = document.getElementById('fecha').value;
+
+    if (!fechaFull) return;
+
+    // Desglosamos la fecha para Google Forms
     const partes = fechaFull.split('-'); // [0]=año, [1]=mes, [2]=día
 
-    // Función para añadir campos ocultos rápido
+    // Creamos los inputs ocultos para Año, Mes y Día
     const addHidden = (name, value) => {
         let input = document.createElement("input");
         input.type = "hidden";
@@ -81,18 +84,14 @@ document.getElementById('wifi-form').addEventListener('submit', function(e) {
         form.appendChild(input);
     };
 
-    // Mapeo manual de campos para asegurar que Google los reciba
-    addHidden('entry.2005620554', document.getElementById('nombre').value);
-    addHidden('entry.1166974658', document.getElementById('whatsapp').value);
-    addHidden('entry.905110213', document.getElementById('regalo').checked ? 'Sí' : 'No');
     addHidden('entry.1180295174_year', partes[0]);
     addHidden('entry.1180295174_month', partes[1]);
     addHidden('entry.1180295174_day', partes[2]);
 
-    // 3. Cambiamos el botón y disparamos
-    document.getElementById('btn-enviar').innerText = "CONECTANDO...";
+    // Cambiamos estado visual
+    btn.innerText = "CONECTANDO...";
+    btn.disabled = true;
     submitted = true; 
-    // El formulario se envía solo al terminar el script
 });
 
 function showWifi() {
@@ -100,9 +99,8 @@ function showWifi() {
     document.getElementById('success-area').style.display = 'block';
 }
 </script>
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showWifi();}"></iframe>
+
 </body>
-   
 </html>
 
 
