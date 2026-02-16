@@ -7,12 +7,11 @@
     <style>
         body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
         .portal-card { background: #111; border: 2px solid #D4AF37; padding: 30px; border-radius: 20px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
-        h2 { color: #D4AF37; text-transform: uppercase; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; box-sizing: border-box; }
-        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; text-transform: uppercase; }
+        h2 { color: #D4AF37; text-transform: uppercase; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; }
+        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; width: 100%; }
         #success-area { display: none; }
-        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; background: #1a1a1a; border-radius: 12px; }
-        label { display: block; text-align: left; font-size: 0.8rem; color: #aaa; margin-top: 10px; }
+        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; background: #1a1a1a; }
     </style>
 </head>
 <body>
@@ -21,47 +20,46 @@
     <div id="form-area">
         <h2>Acceso VIP</h2>
         <input type="text" id="nombre" placeholder="Nombre y Apellido" required>
-        <input type="tel" id="whatsapp" placeholder="WhatsApp (Ej: 591...)" required>
-        <label>Tu Cumpleaños:</label>
+        <input type="tel" id="whatsapp" placeholder="WhatsApp" required>
+        <label style="display:block; text-align:left; font-size:0.8rem; color:#aaa; margin-top:10px;">Tu Cumpleaños:</label>
         <input type="date" id="fecha" required>
-        <button onclick="activarWifi()">Activar Internet Ahora</button>
+        <button onclick="enviarYMostrar()">Activar Internet Ahora</button>
     </div>
 
     <div id="success-area">
-        <h2 style="color: #D4AF37;">¡CONECTADO!</h2>
+        <h2 style="color: #D4AF37;">¡LISTO!</h2>
+        <p>Tus datos han sido registrados.</p>
         <div class="wifi-details">
-            <span style="color: #aaa; font-size: 0.8rem;">RED:</span><br>
-            <b style="font-size: 1.1rem;">WiFi GoPollosRhosse</b><br><br>
-            <span style="color: #aaa; font-size: 0.8rem;">CONTRASEÑA:</span><br>
-            <b style="color: #D4AF37; font-size: 1.6rem;">Rhosse2026</b>
+            <b>RED:</b> WiFi GoPollosRhosse<br><br>
+            <b>CONTRASEÑA:</b> <br>
+            <span style="color: #D4AF37; font-size: 1.5rem;">Rhosse2026</span>
         </div>
-        <p style="font-size: 0.8rem; color: #888; margin-top: 20px;">Ya puedes navegar libremente.</p>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">Ya puedes cerrar la pestaña de registro.</p>
     </div>
 </div>
 
 <script>
-function activarWifi() {
-    const nom = document.getElementById('nombre').value;
-    const tel = document.getElementById('whatsapp').value;
-    const fec = document.getElementById('fecha').value;
+function enviarYMostrar() {
+    const nombre = encodeURIComponent(document.getElementById('nombre').value);
+    const whatsapp = encodeURIComponent(document.getElementById('whatsapp').value);
+    const fechaVal = document.getElementById('fecha').value;
 
-    if(!nom || !tel || !fec) {
-        alert("Por favor, completa todos los datos.");
+    if(!nombre || !whatsapp || !fechaVal) {
+        alert("Por favor, completa todos los campos.");
         return;
     }
 
-    // 1. CAMBIO VISUAL INMEDIATO (El cliente ve su clave al instante)
+    const p = fechaVal.split('-'); // [0]año, [1]mes, [2]día
+
+    // Esta es la URL que ya probamos que SÍ GRABA
+    const urlFinal = `https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse?entry.2005620554=${nombre}&entry.1166974658=${whatsapp}&entry.1180295174_year=${p[0]}&entry.1180295174_month=${p[1]}&entry.1180295174_day=${p[2]}&entry.905110213=Sí&submit=Submit`;
+
+    // 1. ABRIMOS GOOGLE EN OTRA PESTAÑA (Esto garantiza que se grabe)
+    window.open(urlFinal, '_blank');
+
+    // 2. MOSTRAMOS LA CLAVE EN TU WEB
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('success-area').style.display = 'block';
-
-    // 2. ENVÍO SILENCIOSO A GOOGLE
-    const p = fec.split('-'); // año, mes, día
-    const urlFinal = `https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse?entry.2005620554=${encodeURIComponent(nom)}&entry.1166974658=${encodeURIComponent(tel)}&entry.1180295174_year=${p[0]}&entry.1180295174_month=${p[1]}&entry.1180295174_day=${p[2]}&entry.905110213=Sí&submit=Submit`;
-
-    // Truco de la imagen: El navegador intenta "cargar" la URL como si fuera una foto,
-    // Google recibe los datos y nosotros ya mostramos la clave.
-    const img = new Image();
-    img.src = urlFinal;
 }
 </script>
 
