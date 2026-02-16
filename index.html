@@ -1,72 +1,97 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WiFi GoPollosRhosse</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
         .portal-card { background: #111; border: 2px solid #D4AF37; padding: 30px; border-radius: 20px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
-        h2 { color: #D4AF37; text-transform: uppercase; }
-        input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; }
-        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; width: 100%; }
+        .logo { max-width: 140px; margin-bottom: 15px; }
+        h2 { color: #D4AF37; font-size: 1.4rem; margin-bottom: 20px; text-transform: uppercase; }
+        input { width: 100%; padding: 12px; margin: 10px 0; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; box-sizing: border-box; font-size: 16px; }
+        input:focus { border-color: #D4AF37; outline: none; box-shadow: 0 0 5px #D4AF37; }
+        label { display: block; text-align: left; font-size: 0.8rem; color: #aaa; margin-top: 5px; padding-left: 2px; }
+        .promo-box { display: flex; align-items: center; font-size: 0.8rem; margin: 15px 0; color: #D4AF37; background: rgba(212, 175, 55, 0.1); padding: 10px; border-radius: 8px; }
+        .promo-box input { width: auto; margin: 0 10px 0 0; }
+        button { background: linear-gradient(45deg, #D4AF37, #F4CF67); color: #000; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1rem; width: 100%; }
         #success-area { display: none; }
-        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; background: #1a1a1a; }
+        .wifi-details { border: 2px dashed #D4AF37; padding: 20px; margin-top: 20px; border-radius: 12px; background: #1a1a1a; margin-bottom: 15px; }
+        .legal-text { font-size: 0.7rem; color: #666; line-height: 1.2; margin-top: 15px; }
     </style>
 </head>
 <body>
+
 <div class="portal-card">
     <img src="logo.png" alt="GoPollosRhosse" class="logo" onerror="this.style.display='none'">
-<div class="portal-card">
+
     <div id="form-area">
         <h2>Acceso VIP</h2>
-        <input type="text" id="nombre" placeholder="Nombre y Apellido" required>
-        <input type="tel" id="whatsapp" placeholder="WhatsApp" required>
-        <label style="display:block; text-align:left; font-size:0.8rem; color:#aaa; margin-top:10px;">Tu Cumpleaños:</label>
-        <input type="date" id="fecha" required>
-        <button onclick="enviarYMostrar()">Activar Internet Ahora</button>
+        <form id="wifi-form" action="https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse" method="POST" target="hidden_iframe">
+            <input type="text" name="entry.2005620554" id="nombre" placeholder="Nombre y Apellido" required>
+            <input type="tel" name="entry.1166974658" id="whatsapp" placeholder="WhatsApp (Ej: 591...)" required>
+            
+            <label>Tu Cumpleaños:</label>
+            <input type="date" id="fecha_input" required>
+
+            <div class="promo-box">
+                <input type="checkbox" name="entry.905110213" value="Sí" checked>
+                <label>¡Quiero mi regalo! 🎁</label>
+            </div>
+
+            <button type="submit" id="btn-enviar">Activar Internet Ahora</button>
+        </form>
     </div>
 
     <div id="success-area">
-        <h2 style="color: #D4AF37;">¡LISTO!</h2>
-        <p>Tus datos han sido registrados.</p>
+        <h2 style="color: #D4AF37;">¡CONECTADO!</h2>
         <div class="wifi-details">
-            <b>RED:</b> WiFi GoPollosRhosse<br><br>
-            <b>CONTRASEÑA:</b> <br>
-            <span style="color: #D4AF37; font-size: 1.5rem;">Rhosse2026</span>
+            <span style="color: #aaa; font-size: 0.8rem;">RED:</span><br><b>WiFi GoPollosRhosse</b><br><br>
+            <span style="color: #aaa; font-size: 0.8rem;">CONTRASEÑA:</span><br><b style="color: #D4AF37; font-size: 1.6rem;">Rhosse2026</b>
         </div>
-        <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">Ya puedes cerrar la pestaña de registro.</p>
+        <p class="legal-text">
+            Al utilizar este acceso, aceptas recibir promociones y regalos de <b>GoPollosRhosse</b> en tu WhatsApp. 
+            <br>Puedes solicitar la baja en cualquier momento.
+        </p>
     </div>
 </div>
 
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { finalizar(); }"></iframe>
+
 <script>
-function enviarYMostrar() {
-    const nombre = encodeURIComponent(document.getElementById('nombre').value);
-    const whatsapp = encodeURIComponent(document.getElementById('whatsapp').value);
-    const fechaVal = document.getElementById('fecha').value;
+var submitted = false;
 
-    if(!nombre || !whatsapp || !fechaVal) {
-        alert("Por favor, completa todos los campos.");
-        return;
-    }
+document.getElementById('wifi-form').onsubmit = function() {
+    const fecha = document.getElementById('fecha_input').value;
+    if(!fecha) return false;
 
-    const p = fechaVal.split('-'); // [0]año, [1]mes, [2]día
+    const partes = fecha.split('-'); 
+    const f = document.getElementById('wifi-form');
+    
+    const crearOculto = (n, v) => {
+        let i = document.createElement("input");
+        i.type = "hidden"; i.name = n; i.value = v;
+        f.appendChild(i);
+    };
 
-    // Esta es la URL que ya probamos que SÍ GRABA
-    const urlFinal = `https://docs.google.com/forms/d/e/1FAIpQLSc3jr1penfPWWdfh5JrdN36m5K7SdFo49NS2UPVXH0NjBq17Q/formResponse?entry.2005620554=${nombre}&entry.1166974658=${whatsapp}&entry.1180295174_year=${p[0]}&entry.1180295174_month=${p[1]}&entry.1180295174_day=${p[2]}&entry.905110213=Sí&submit=Submit`;
+    crearOculto('entry.1180295174_year', partes[0]);
+    crearOculto('entry.1180295174_month', partes[1]);
+    crearOculto('entry.1180295174_day', partes[2]);
 
-    // 1. ABRIMOS GOOGLE EN OTRA PESTAÑA (Esto garantiza que se grabe)
-    window.open(urlFinal, '_blank');
+    document.getElementById('btn-enviar').innerText = "CONECTANDO...";
+    submitted = true;
+    return true; 
+};
 
-    // 2. MOSTRAMOS LA CLAVE EN TU WEB
+function finalizar() {
     document.getElementById('form-area').style.display = 'none';
     document.getElementById('success-area').style.display = 'block';
 }
 </script>
 
 </body>
-</html> --->
-
+</html>
+<!--
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -161,4 +186,4 @@ function finalizar() {
 </script>
 
 </body>
-</html>
+</html> --->
