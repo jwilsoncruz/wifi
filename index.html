@@ -68,14 +68,13 @@ var submitted = false;
 document.getElementById('wifi-form').addEventListener('submit', function(e) {
     const btn = document.getElementById('btn-enviar');
     const form = e.target;
-    const fechaFull = document.getElementById('fecha').value;
+    const fechaVal = document.getElementById('fecha').value;
 
-    if (!fechaFull) return;
+    if (!fechaVal) return;
 
-    // Desglosamos la fecha para Google Forms
-    const partes = fechaFull.split('-'); // [0]=año, [1]=mes, [2]=día
+    // Desglose de fecha para los campos entry.1180295174_year/month/day
+    const partes = fechaVal.split('-'); 
 
-    // Creamos los inputs ocultos para Año, Mes y Día
     const addHidden = (name, value) => {
         let input = document.createElement("input");
         input.type = "hidden";
@@ -84,11 +83,11 @@ document.getElementById('wifi-form').addEventListener('submit', function(e) {
         form.appendChild(input);
     };
 
+    // Estos son los campos que Google exige por separado
     addHidden('entry.1180295174_year', partes[0]);
     addHidden('entry.1180295174_month', partes[1]);
     addHidden('entry.1180295174_day', partes[2]);
 
-    // Cambiamos estado visual
     btn.innerText = "CONECTANDO...";
     btn.disabled = true;
     submitted = true; 
@@ -102,14 +101,3 @@ function showWifi() {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
